@@ -28,6 +28,8 @@ def automatizar_encendido_apagado():
     arranque = ""
     apagado = ""
     texto_estado = "ENCENDIDO"
+    modo_fiesta = False
+    modo_nocturno = False
     if check_dispositivos_por_tipo("ENCENDIBLES"):
         mostrar_dispositivos_por_tipo("ENCENDIBLES")
     else:
@@ -38,10 +40,10 @@ def automatizar_encendido_apagado():
 
     print("Indique un horario de inicio de la rutina:")
     inicio = input()
-    print("Indique el estado deseado del dispositivo ( ENCENDIDO (Y) /APAGADO (X) ):")
+    print("Indique el estado deseado del dispositivo ( ENCENDIDO (Y) / APAGADO (X) ):")
     estado = input()
     while str.upper(estado) not in ("X", "Y"):
-        print("Indique el estado deseado del dispositivo ( ENCENDIDO (Y) /APAGADO (X) ):")
+        print("Indique el estado deseado del dispositivo ( ENCENDIDO (Y) / APAGADO (X) ):")
         estado = input()
 
     if estado == "X":
@@ -60,12 +62,22 @@ def automatizar_encendido_apagado():
     if len(nivel_input) <= 0:
         nivel_input = 1
 
+    modo_fiesta_input = input(
+        "Si el dispositivo tiene modo fiesta y desea activarlo al iniciar la rutina indiquelo: ( ENCENDIDO (Y) / APAGADO (X) ) ")
+    modo_fiesta = str.upper(modo_fiesta_input) == "Y"
+
+    modo_nocturno_input = input(
+        "Si el dispositivo tiene modo nocturno y desea activarlo al iniciar la rutina indiquelo: ( ENCENDIDO (Y) / APAGADO (X) ) ")
+    modo_nocturno = str.upper(modo_nocturno_input) == "Y"
+
     automatizaciones[identificador] = {
         "Horario de inicio de la rutina": inicio,
         "Estado del dispositivo": texto_estado,
         "Horario arranque de dispositivo": arranque,
         "Horario apagado de dispositivo": apagado,
-        "Nivel de intensidad: ": nivel_input
+        "Nivel de intensidad: ": nivel_input,
+        "Modo fiesta": modo_fiesta,
+        "Modo nocturno": modo_nocturno
     }
 
     return True
@@ -87,10 +99,10 @@ def automatizar_aire_acondicionado():
 
     print("Indique un horario de inicio de la rutina:")
     inicio = input()
-    print("Indique el estado deseado del dispositivo ( ENCENDIDO (Y) /APAGADO (X) ):")
+    print("Indique el estado deseado del dispositivo ( ENCENDIDO (Y) / APAGADO (X) ):")
     estado = input()
     while str.upper(estado) not in ("X", "Y"):
-        print("Indique el estado deseado del dispositivo ( ENCENDIDO (Y) /APAGADO (X) ):")
+        print("Indique el estado deseado del dispositivo ( ENCENDIDO (Y) / APAGADO (X) ):")
         estado = input()
 
     if estado == "X":
@@ -109,12 +121,12 @@ def automatizar_aire_acondicionado():
         print(
             "Si desea agregar un horario de apagado indiquelo a continuacion. De lo contrario deje vacio el espacio.")
         apagado = input()
-        print("Ingrese el modo de aire acondicionado: ( (1) VENTILADOR,(2) FRIO, (3) CALOR, (4) HUMEDAD) ")
+        print("Ingrese el modo de aire acondicionado: ( (1) VENTILADOR,(2) FRIO, (3) CALOR, (4) HUMEDAD ) ")
         modo_input = int(input())
         if modo_input < 0 or modo_input > 4:
             while modo_input < 0 or modo_input > 4:
                 print("Opcion invalida")
-                print("Ingrese el modo de aire acondicionado: ((1) VENTILADOR,(2) FRIO, (3) CALOR, (4) HUMEDAD) ")
+                print("Ingrese el modo de aire acondicionado: ((1) VENTILADOR,(2) FRIO, (3) CALOR, (4) HUMEDAD ) ")
                 if modo_input == 1:
                     modo = "VENTILADOR"
                 elif modo_input == 2:
@@ -148,6 +160,7 @@ def automatizar_ventilador():
     arranque = ""
     apagado = ""
     velocidad = 0
+    giro = False
     texto_estado = "ENCENDIDO"
     if check_dispositivos_por_tipo("VENTILADOR"):
         mostrar_dispositivos_por_tipo("VENTILADOR")
@@ -159,12 +172,12 @@ def automatizar_ventilador():
     print("Indique un horario de inicio de la rutina:")
     inicio = input()
 
-    print("Indique el estado deseado del dispositivo ( ENCENDIDO (Y) /APAGADO (X) ):")
+    print("Indique el estado deseado del dispositivo ( ENCENDIDO (Y) / APAGADO (X) ):")
 
     estado = input()
 
     while str.upper(estado) not in ("X", "Y"):
-        print("Indique el estado deseado del dispositivo ( ENCENDIDO (Y) /APAGADO (X) ):")
+        print("Indique el estado deseado del dispositivo ( ENCENDIDO (Y) / APAGADO (X) ):")
 
         estado = input()
 
@@ -185,12 +198,16 @@ def automatizar_ventilador():
             "Si desea agregar un horario de apagado indiquelo a continuacion. De lo contrario deje vacio el espacio.")
         apagado = input()
 
+        giro_input = input("Indique si desea habilitar el giro en el ventilador: ( SI (Y) / NO (X) )")
+        giro = str.upper(giro_input) == "Y"
+
     automatizaciones[identificador] = {
         "Horario de inicio de la rutina": inicio,
         "Estado del dispositivo": texto_estado,
         "Horario arranque de dispositivo": arranque,
         "Horario apagado de dispositivo": apagado,
-        "Velocidad ventilador": velocidad
+        "Velocidad ventilador": velocidad,
+        "Giro:": giro
     }
 
     return True

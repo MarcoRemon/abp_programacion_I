@@ -28,8 +28,7 @@ def automatizar_encendido_apagado():
     arranque = ""
     apagado = ""
     texto_estado = "ENCENDIDO"
-    modo_fiesta = False
-    modo_nocturno = False
+
     if check_dispositivos_por_tipo("ENCENDIBLES"):
         mostrar_dispositivos_por_tipo("ENCENDIBLES")
     else:
@@ -187,6 +186,8 @@ def automatizar_ventilador():
             "Si desea agregar un horario de encendido indiquelo a continuacion. De lo contrario deje vacio el espacio.")
         arranque = input()
     else:
+        giro_input = input("Indique si desea habilitar el giro en el ventilador: ( SI (Y) / NO (X) )")
+        giro = str.upper(giro_input) == "Y"
         print("Indique la velocidad del dispositivo con un valor entre 1 y 3 inclusive:")
         velocidad = int(input())
         if velocidad < 0 or velocidad > 4:
@@ -197,9 +198,6 @@ def automatizar_ventilador():
         print(
             "Si desea agregar un horario de apagado indiquelo a continuacion. De lo contrario deje vacio el espacio.")
         apagado = input()
-
-        giro_input = input("Indique si desea habilitar el giro en el ventilador: ( SI (Y) / NO (X) )")
-        giro = str.upper(giro_input) == "Y"
 
     automatizaciones[identificador] = {
         "Horario de inicio de la rutina": inicio,
@@ -221,7 +219,7 @@ def agregar_dispositivo():
         "2) Ventilador (Pie, Techo). "
         "3) Encendible (Luces, Computadores personales, cafeteras): "))
     tipo_dispositivo = ""
-    if tipo > 0 and tipo < 3:
+    if 0 < tipo <= 3:
         if tipo == 1:
             tipo_dispositivo = "AIRE_ACONDICIONADO"
         if tipo == 2:
@@ -308,8 +306,3 @@ def eliminar_automatizacion():
         print("Rutina eliminada.")
     else:
         print("Valor invalido.")
-
-
-if __name__ == "__main__":
-    print("Iniciando aplicacion desde el main")
-

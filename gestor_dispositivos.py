@@ -7,13 +7,21 @@ TIPOS_VALIDOS = ("AIRE_ACONDICIONADO", "VENTILADOR",
 MODOS_AC = ("VENTILADOR", "FRIO", "CALOR", "HUMEDAD")
 
 
-def automatizar_dispositivo(tipo):
-    if tipo == 1:
-        automatizar_aire_acondicionado()
-    if tipo == 2:
-        automatizar_ventilador()
-    if tipo == 3:
-        automatizar_encendido_apagado()
+def automatizar_dispositivo():
+    tipo = int(input(
+        "¿Que tipo de dispositivo es?: "
+        "1) Aire acondicionado. "
+        "2) Ventilador (Pie, Techo). "
+        "3) Encendible (Luces, Computadores personales, cafeteras): "))
+    if 0 < tipo <= 3:
+        if tipo == 1:
+            automatizar_aire_acondicionado()
+        if tipo == 2:
+            automatizar_ventilador()
+        if tipo == 3:
+            automatizar_encendido_apagado()
+    else:
+        print("Opcion invalida")
 
 
 def automatizar_encendido_apagado():
@@ -46,11 +54,18 @@ def automatizar_encendido_apagado():
             "Si desea agregar un horario de apagado indiquelo a continuacion. De lo contrario deje vacio el espacio.")
         apagado = input()
 
+    nivel_input = input(
+        "Si el dispositivo tiene multiples niveles de intensidad indiquelo a continuacion, de lo contrario deje el espacio vacio: ")
+
+    if len(nivel_input) <= 0:
+        nivel_input = 1
+
     automatizaciones[identificador] = {
         "Horario de inicio de la rutina": inicio,
         "Estado del dispositivo": texto_estado,
         "Horario arranque de dispositivo": arranque,
         "Horario apagado de dispositivo": apagado,
+        "Nivel de intensidad: ": nivel_input
     }
 
     return True
@@ -181,7 +196,13 @@ def automatizar_ventilador():
     return True
 
 
-def agregar_dispositivo(nombre, tipo):
+def agregar_dispositivo():
+    nombre = input("Indique el nombre del dispositivo: ")
+    tipo = int(input(
+        "¿Que tipo de dispositivo es?: "
+        "1) Aire acondicionado. "
+        "2) Ventilador (Pie, Techo). "
+        "3) Encendible (Luces, Computadores personales, cafeteras): "))
     tipo_dispositivo = ""
     if tipo > 0 and tipo < 3:
         if tipo == 1:
@@ -202,6 +223,7 @@ def agregar_dispositivo(nombre, tipo):
             "Tipo": tipo_dispositivo
         }
         dispositivos[len(dispositivos) + 1] = dispositivo
+    print(f"El dispositivo {nombre} fue registrado correctamente.")
 
 
 def check_dispositivo_existe_por_nombre(nombre):
@@ -219,7 +241,8 @@ def mostrar_dispositivos():
         print()
 
 
-def buscar_dispositivo_por_nombre(nombre):
+def buscar_dispositivo_por_nombre():
+    nombre = input("Indique el nombre del dispositivo: ")
     for id_disp, disp in dispositivos.items():
         if disp['Nombre'] == str.upper(nombre):
             print(f"Identificador del dispositivo: {id_disp}. "

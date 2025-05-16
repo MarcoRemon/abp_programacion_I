@@ -27,40 +27,20 @@ while aplicacion_ejecutando:
             print("Opcion invalida.")
         else:
             if opcion == 1:
-                nombre = input("Indique el nombre del dispositivo: ")
-                tipo_input = int(input(
-                    "¿Que tipo de dispositivo es?: "
-                    "1) Aire acondicionado. "
-                    "2) Ventilador (Pie, Techo). "
-                    "3) Encendible (Luces, Computadores personales, cafeteras): "))
-                if 0 < tipo_input < 3:
-                    gestor_dispositivos.agregar_dispositivo(nombre, tipo_input)
-                    print(f"El dispositivo {nombre} fue registrado correctamente.")
-                else:
-                    print("Opcion invalida")
-
+                gestor_dispositivos.agregar_dispositivo()
             if opcion == 2:
                 gestor_dispositivos.mostrar_dispositivos()
             if opcion == 3:
-                nombre = input("Indique el nombre del dispositivo: ")
-                gestor_dispositivos.buscar_dispositivo_por_nombre(nombre)
+                gestor_dispositivos.buscar_dispositivo_por_nombre()
             if opcion == 4:
-                tipo_input = int(input(
-                    "¿Que tipo de dispositivo es?: "
-                    "1) Aire acondicionado. "
-                    "2) Ventilador (Pie, Techo). "
-                    "3) Encendible (Luces, Computadores personales, cafeteras): "))
-                if 0 < tipo_input <= 3:
-                    gestor_dispositivos.automatizar_dispositivo(tipo_input)
-                else:
-                    print("Opcion invalida")
-        if opcion == 5:
-            gestor_dispositivos.eliminar_automatizacion()
-        if opcion == 6:
-            gestor_dispositivos.eliminar_dispositivo()
-        if opcion == 7:
-            print("Cerrando aplicacion.")
-            aplicacion_ejecutando = False
+                gestor_dispositivos.automatizar_dispositivo()
+            if opcion == 5:
+                gestor_dispositivos.eliminar_automatizacion()
+            if opcion == 6:
+                gestor_dispositivos.eliminar_dispositivo()
+            if opcion == 7:
+                print("Cerrando aplicacion.")
+                aplicacion_ejecutando = False
 
     except ValueError:
         print("El valor debe ser numerico")

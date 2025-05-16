@@ -308,4 +308,4 @@ def eliminar_automatizacion():
         print("Valor invalido.")
 
 if __name__ == "__main__":
-    print("Iniciando aplicacion desde el main")
+    print("La aplicacion debe ejecutarse desde el modulo main.")

@@ -291,3 +291,8 @@ def eliminar_automatizacion():
         print("Rutina eliminada.")
     else:
         print("Valor invalido.")
+
+
+if __name__ == "__main__":
+    print("Iniciando aplicacion desde el main")
+

@@ -9,7 +9,8 @@ def menu():
     print("4:Automatizar dispositivo:")
     print("5:Eliminar automatizacion")
     print("6:Desconectar dispositivo:")
-    print("7:Salir:")
+    print("7:Mostrar Automatizacion:")
+    print("8:Salir:")
 
 
 aplicacion_ejecutando = True
@@ -23,7 +24,7 @@ while aplicacion_ejecutando:
     try:
         opcion = int(input("Elija una opcion:"))
 
-        if opcion < 1 or opcion > 7:
+        if opcion < 1 or opcion > 8:
             print("Opcion invalida.")
         else:
             if opcion == 1:
@@ -39,6 +40,8 @@ while aplicacion_ejecutando:
             if opcion == 6:
                 gestor_dispositivos.eliminar_dispositivo()
             if opcion == 7:
+                gestor_dispositivos.mostrar_automatizaciones()
+            if opcion == 8:
                 print("Cerrando aplicacion.")
                 aplicacion_ejecutando = False
 

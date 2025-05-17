@@ -1,5 +1,5 @@
 from gestor_dispositivos import agregar_dispositivo, mostrar_dispositivos, buscar_dispositivo_por_nombre, \
-    automatizar_dispositivo, eliminar_automatizacion, eliminar_dispositivo
+    automatizar_dispositivo, eliminar_automatizacion, eliminar_dispositivo,mostrar_automatizaciones
 
 
 def menu():
@@ -41,7 +41,7 @@ while aplicacion_ejecutando:
             if opcion == 6:
                 eliminar_dispositivo()
             if opcion == 7:
-                gestor_dispositivos.mostrar_automatizaciones()
+                mostrar_automatizaciones()
             if opcion == 8:
                 print("Cerrando aplicacion.")
                 aplicacion_ejecutando = False

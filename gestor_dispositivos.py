@@ -45,7 +45,7 @@ def automatizar_encendido_apagado():
         print("Indique el estado deseado del dispositivo ( ENCENDIDO (Y) / APAGADO (X) ):")
         estado = input()
 
-    if estado == "X":
+    if str.upper(estado) == "X":
         texto_estado = "APAGADO"
         print(
             "Si desea agregar un horario de encendido indiquelo a continuacion. De lo contrario deje vacio el espacio.")
@@ -74,7 +74,7 @@ def automatizar_encendido_apagado():
         "Estado del dispositivo": texto_estado,
         "Horario arranque de dispositivo": arranque,
         "Horario apagado de dispositivo": apagado,
-        "Nivel de intensidad: ": nivel_input,
+        "Nivel de intensidad": nivel_input,
         "Modo fiesta": modo_fiesta,
         "Modo nocturno": modo_nocturno
     }
@@ -104,7 +104,7 @@ def automatizar_aire_acondicionado():
         print("Indique el estado deseado del dispositivo ( ENCENDIDO (Y) / APAGADO (X) ):")
         estado = input()
 
-    if estado == "X":
+    if str.upper(estado) == "X":
         texto_estado = "APAGADO"
         print(
             "Si desea agregar un horario de encendido indiquelo a continuacion. De lo contrario deje vacio el espacio.")
@@ -126,14 +126,14 @@ def automatizar_aire_acondicionado():
             while modo_input < 0 or modo_input > 4:
                 print("Opcion invalida")
                 print("Ingrese el modo de aire acondicionado: ((1) VENTILADOR,(2) FRIO, (3) CALOR, (4) HUMEDAD ) ")
-                if modo_input == 1:
-                    modo = "VENTILADOR"
-                elif modo_input == 2:
-                    modo = "FRIO"
-                elif modo_input == 3:
-                    modo = "CALOR"
-                elif modo_input == 4:
-                    modo = "HUMEDAD"
+        if modo_input == 1:
+            modo = "VENTILADOR"
+        elif modo_input == 2:
+            modo = "FRIO"
+        elif modo_input == 3:
+            modo = "CALOR"
+        elif modo_input == 4:
+            modo = "HUMEDAD"
         print("Ingrese una temperatura entre 15-38 (Celcius): ")
         temperatura = int(input())
         if temperatura < 15 or temperatura > 38:
@@ -180,7 +180,7 @@ def automatizar_ventilador():
 
         estado = input()
 
-    if estado == "X":
+    if str.upper(estado) == "X":
         texto_estado = "APAGADO"
         print(
             "Si desea agregar un horario de encendido indiquelo a continuacion. De lo contrario deje vacio el espacio.")
@@ -205,7 +205,7 @@ def automatizar_ventilador():
         "Horario arranque de dispositivo": arranque,
         "Horario apagado de dispositivo": apagado,
         "Velocidad ventilador": velocidad,
-        "Giro:": giro
+        "Giro": giro
     }
 
     return True
@@ -249,6 +249,8 @@ def check_dispositivo_existe_por_nombre(nombre):
 
 
 def mostrar_dispositivos():
+    if len(dispositivos) == 0:
+        print("No hay dispositivos")
     for id_disp, disp in dispositivos.items():
         print(f"Identificador del dispositivo: {id_disp}.")
         for clave, valor in disp.items():
@@ -258,13 +260,17 @@ def mostrar_dispositivos():
 
 def buscar_dispositivo_por_nombre():
     nombre = input("Indique el nombre del dispositivo: ")
+    encontrado = False
     for id_disp, disp in dispositivos.items():
         if disp['Nombre'] == str.upper(nombre):
             print(f"Identificador del dispositivo: {id_disp}. "
                   f"Nombre:{disp['Nombre']}. "
                   f"Estado:{disp['Estado']}. "
                   f"Tipo:{disp['Tipo']}.")
+            encontrado = True
             break
+    if not encontrado:
+        print("No se encontro el dispositivo")
 
 
 def mostrar_dispositivos_por_tipo(tipo):
@@ -292,11 +298,12 @@ def eliminar_dispositivo():
 
 
 def mostrar_automatizaciones():
+    if len(automatizaciones) == 0:
+        print("No hay automatizaciones")
     for key, values in automatizaciones.items():
-        print(f"Dispositivo:{key}.")
-        for parametro, automatizacion in values.items():
-            print("Rutina: ")
-            print(f"{parametro},{automatizacion}")
+        print(f"Automatizacion del dispositivo:{key}.")
+        for automatizacion, atributo in values.items():
+            print(f"{automatizacion}:{atributo}")
 
 
 def eliminar_automatizacion():

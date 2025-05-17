@@ -1,4 +1,5 @@
-import gestor_dispositivos
+from gestor_dispositivos import agregar_dispositivo, mostrar_dispositivos, buscar_dispositivo_por_nombre, \
+    automatizar_dispositivo, eliminar_automatizacion, eliminar_dispositivo
 
 
 def menu():
@@ -27,17 +28,17 @@ while aplicacion_ejecutando:
             print("Opcion invalida.")
         else:
             if opcion == 1:
-                gestor_dispositivos.agregar_dispositivo()
+                agregar_dispositivo()
             if opcion == 2:
-                gestor_dispositivos.mostrar_dispositivos()
+                mostrar_dispositivos()
             if opcion == 3:
-                gestor_dispositivos.buscar_dispositivo_por_nombre()
+                buscar_dispositivo_por_nombre()
             if opcion == 4:
-                gestor_dispositivos.automatizar_dispositivo()
+                automatizar_dispositivo()
             if opcion == 5:
-                gestor_dispositivos.eliminar_automatizacion()
+                eliminar_automatizacion()
             if opcion == 6:
-                gestor_dispositivos.eliminar_dispositivo()
+                eliminar_dispositivo()
             if opcion == 7:
                 print("Cerrando aplicacion.")
                 aplicacion_ejecutando = False

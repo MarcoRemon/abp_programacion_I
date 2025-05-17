@@ -264,6 +264,7 @@ def buscar_dispositivo_por_nombre():
                   f"Nombre:{disp['Nombre']}. "
                   f"Estado:{disp['Estado']}. "
                   f"Tipo:{disp['Tipo']}.")
+            break
 
 
 def mostrar_dispositivos_por_tipo(tipo):
@@ -302,10 +303,14 @@ def eliminar_automatizacion():
     mostrar_dispositivos()
     identificador = int(input("Ingrese el Identificador del dispositivo cuya rutina desea eliminar: "))
     if not identificador > len(dispositivos) or identificador <= 0:
-        automatizaciones.pop(identificador)
-        print("Rutina eliminada.")
+        if identificador in automatizaciones:
+            automatizaciones.pop(identificador)
+            print("Rutina eliminada.")
+        else:
+            print("No existe rutina para el dispositivo")
     else:
         print("Valor invalido.")
+
 
 if __name__ == "__main__":
     print("La aplicacion debe ejecutarse desde el modulo main.")

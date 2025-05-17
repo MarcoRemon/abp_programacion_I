@@ -278,7 +278,7 @@ def eliminar_dispositivo():
 def mostrar_automatizaciones():
     for key, values in automatizaciones.items():
         print(f"Dispositivo:{key}.")
-        for parametro, automatizacion in values:
+        for parametro, automatizacion in values.items():
             print("Rutina: ")
             print(f"{parametro},{automatizacion}")
 
